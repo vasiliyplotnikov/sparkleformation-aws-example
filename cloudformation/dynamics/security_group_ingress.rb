@@ -36,7 +36,7 @@ SparkleFormation.dynamic(:security_group_ingress) do |_name, _config={}|
 
   end
 
-  resources("#{sgi_name}".to_sym) do
+  res = dynamic!(:aws_ec2_security_group_ingress, sgi_name.to_sym) do
     type 'AWS::EC2::SecurityGroupIngress'
     properties do
       from_port ref!("#{sgi_name}_port".to_sym)
@@ -63,5 +63,5 @@ SparkleFormation.dynamic(:security_group_ingress) do |_name, _config={}|
     end
 
   end
-
+  res
 end
